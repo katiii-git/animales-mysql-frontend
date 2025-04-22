@@ -1,0 +1,47 @@
+name: CI/CD deploy master
+on: 
+  push:
+  #  branches: [ "master"]
+  #pull_request:
+    branches: [ "master"]
+jobs:
+  ci_cd_deploy_master:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: ls -la
+      - uses: actions/checkout@v2
+      - run: ls -la
+      - run: echo 'hello universe'
+      - name: download, run httpd image
+        run:  | 
+          docker run -d --name serving_base httpd
+
+      - name: docker ps
+        run:  | 
+          docker ps
+
+      - name: cp index.html, callrestapi.js  to container
+        run:  | 
+          docker cp . serving_base:/usr/local/apache2/htdocs
+
+      - name: list container
+        run:  | 
+          docker exec serving_base ls -la /usr/local/apache2/htdocs
+
+      - name: build custom docker image
+        run:  docker commit --change  "ENV MODEL_NAME  ${{ secrets.MODEL_NAME }}"
+              serving_base ${{ secrets.DOCKER_USER}}/${{secrets.MODEL_NAME}}:${{github.sha}}       
+     
+      - name: list images
+        run:  | 
+          docker images
+
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run:  docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        
+      - name: docker push
+        run:  docker push ${{ secrets.DOCKER_USER}}/${{secrets.MODEL_NAME}}:${{github.sha}}       

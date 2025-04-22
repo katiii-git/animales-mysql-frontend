@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usuarios API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <p>Consumo de REST-API de Usuarios</p>
+
+  <form>
+    <div>
+      <label for="name">Nombre</label>
+      <input type="text" id="name">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="text" id="email">
+    </div>
+    <div>
+      <label for="age">Edad</label>
+      <input type="text" id="age">
+    </div>
+    <div>
+      <label for="comments">Comentarios</label>
+      <input type="text" id="comments">
+    </div>
+    <button type="button" onclick="postUser()">Agregar usuario</button>
+    <button type="button" onclick="getUsers()">Ver usuarios</button>
+  </form>
+
+  <div>
+    <!-- Buscador por ID -->
+    <label for="search-id">Buscar animal por ID:</label>
+    <input type="text" id="search-id">
+    <button type="button" onclick="getAnimalById()">Buscar animal</button>
+  </div>
+
+  <div class="table-container" id="resultado"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="callrestapi.js"></script>
+  
+  <div id="editModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Editar Usuario</h3>
+    <input type="hidden" id="edit-id">
+    <label>Nombre</label>
+    <input type="text" id="edit-name"><br>
+    <label>Email</label>
+    <input type="text" id="edit-email"><br>
+    <label>Edad</label>
+    <input type="text" id="edit-age"><br>
+    <label>Comentarios</label>
+    <input type="text" id="edit-comments"><br>
+    <button onclick="confirmEdit()">Guardar cambios</button>
+    <button onclick="closeModal()">Cancelar</button>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+</body>
+</html>
+
