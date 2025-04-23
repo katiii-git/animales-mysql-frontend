@@ -57,6 +57,7 @@ function getAnimals() {
             htmlCards += `
         <div class="animal-card">
           <h3>${item.name}</h3>
+          <p><strong>ID:</strong> ${item.id}</p> 
           <p><strong>Especie:</strong> ${item.species}</p>
           <p><strong>Edad:</strong> ${item.age}</p>
           <p><strong>Habitat:</strong> ${item.habitat}</p>
@@ -170,4 +171,12 @@ function confirmEdit() {
     }
   });
 }
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show';
 
+  setTimeout(() => {
+    toast.className = 'toast';
+  }, 3000);
+}

@@ -51,6 +51,9 @@
 
   <div class="table-container" id="resultado"></div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="callrestapi.js"></script>
+
   <div id="editModal" class="modal hidden">
     <div class="modal-content">
       <h3>Editar Animal</h3>
@@ -65,24 +68,22 @@
       <label>Edad</label>
       <input type="number" id="edit-age"><br>
 
-      <label>Género</label>
+      <label>Genero</label>
       <input type="text" id="edit-gender"><br>
 
-      <label>Hábitat</label>
+      <label>Habitat</label>
       <input type="text" id="edit-habitat"><br>
 
       <label>Dieta</label>
       <input type="text" id="edit-diet"><br>
 
-      <label>Descripción</label>
+      <label>Descripcion</label>
       <input type="text" id="edit-description"><br>
 
       <button onclick="confirmEdit()">Guardar cambios</button>
       <button onclick="closeModal()">Cancelar</button>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="callrestapi.js"></script> 
 <div id="toast" class="toast"></div>
 </body>
 </html>
