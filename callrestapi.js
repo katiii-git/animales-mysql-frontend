@@ -59,10 +59,10 @@ function getAnimals() {
           <h3>${item.name}</h3>
           <p><strong>Especie:</strong> ${item.species}</p>
           <p><strong>Edad:</strong> ${item.age}</p>
-          <p><strong>Hábitat:</strong> ${item.habitat}</p>
-          <p><strong>Género:</strong> ${item.gender}</p>
+          <p><strong>Habitat:</strong> ${item.habitat}</p>
+          <p><strong>Genero:</strong> ${item.gender}</p>
           <p><strong>Dieta:</strong> ${item.diet}</p>
-          <p><strong>Descripción:</strong> ${item.description}</p>
+          <p><strong>Descripcion:</strong> ${item.description}</p>
           <div class="card-buttons">
             <button onclick="deleteAnimal(${item.id})">Eliminar</button>
             <button onclick="openEditModal(${item.id}, '${item.name}', '${item.species}', ${item.age}, '${item.habitat}', '${item.gender}', '${item.diet}', '${item.description}')">Editar</button>
@@ -96,10 +96,10 @@ function getAnimalById() {
                 <p>Nombre: ${animal.name}</p>
                 <p>Especie: ${animal.species}</p>
                 <p>Edad: ${animal.age}</p>
-                <p>Hábitat: ${animal.habitat}</p>
-                <p>Género: ${animal.gender}</p>
+                <p>Habitat: ${animal.habitat}</p>
+                <p>Genero: ${animal.gender}</p>
                 <p>Dieta: ${animal.diet}</p>
-                <p>Descripción: ${animal.description}</p>
+                <p>Descripcion: ${animal.description}</p>
             `;
             $('#resultado').html(htmlAnimal);
             $('#search-id').val('');
