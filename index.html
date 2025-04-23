@@ -42,16 +42,24 @@
   
   <div id="editModal" class="modal hidden">
   <div class="modal-content">
-    <h3>Editar Usuario</h3>
+    <h3>Editar Animal</h3>
     <input type="hidden" id="edit-id">
+    
     <label>Nombre</label>
     <input type="text" id="edit-name"><br>
-    <label>Email</label>
-    <input type="text" id="edit-email"><br>
+    
+    <label>Especie</label>
+    <input type="text" id="edit-species"><br>
+    
     <label>Edad</label>
-    <input type="text" id="edit-age"><br>
-    <label>Comentarios</label>
-    <input type="text" id="edit-comments"><br>
+    <input type="number" id="edit-age"><br>
+    
+    <label>Hábitat</label>
+    <input type="text" id="edit-habitat"><br>
+    
+    <label>Descripción</label>
+    <input type="text" id="edit-description"><br>
+    
     <button onclick="confirmEdit()">Guardar cambios</button>
     <button onclick="closeModal()">Cancelar</button>
   </div>

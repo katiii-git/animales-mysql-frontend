@@ -1,4 +1,4 @@
-var url= "https://mysql-restapi-ltst.onrender.com/api/animals";
+var url= "https://animales-sql-restapi.onrender.com/api/animals";
 
 function postAnimal() {
     var myName = $('#name').val();
