@@ -5,6 +5,8 @@ function postAnimal() {
     var mySpecies = $('#species').val();
     var myAge = $('#age').val();
     var myHabitat = $('#habitat').val();
+    var myGender = $('#gender').val();
+    var myDiet = $('#diet').val();
     var myDescription = $('#description').val();
 
     var myAnimal = {
@@ -12,6 +14,8 @@ function postAnimal() {
         species: mySpecies,
         age: myAge,
         habitat: myHabitat,
+        gender: myGender,
+        diet: myDiet,
         description: myDescription
     };
 
@@ -29,6 +33,8 @@ function postAnimal() {
             $('#species').val('');
             $('#age').val('');
             $('#habitat').val('');
+            $('#gender').val('');
+            $('#diet').val('');
             $('#description').val('');
             getAnimals();
         },
@@ -44,33 +50,33 @@ function getAnimals() {
         console.log(json);
 
         var arrAnimals = json.animals;
-        var htmlTableAnimals = '<table border="1">';
+        var htmlCards = '<div class="cards-container">';
 
         arrAnimals.forEach(function(item) {
             console.log(item);
-            htmlTableAnimals += '<tr>' +
-                                '<td>' + item.id + '</td>' +
-                                '<td>' + item.name + '</td>' +
-                                '<td>' + item.species + '</td>' +
-                                '<td>' + item.age + '</td>' +
-                                '<td>' + item.habitat + '</td>' +
-                                '<td>' + item.description + '</td>' +
-                                '<td><button onclick="deleteAnimal(' + item.id + ')">Eliminar</button></td>' +
-                                '<td><button onclick="openEditModal(' +
-  item.id + ', \'' +
-  item.name + '\', \'' +
-  item.species + '\', ' +
-  item.age + ', \'' +
-  item.habitat + '\', \'' +
-  item.description + '\')">Editar</button></td>' +
-                               '</tr>';
-        });
+            htmlCards += `
+        <div class="animal-card">
+          <h3>${item.name}</h3>
+          <p><strong>Especie:</strong> ${item.species}</p>
+          <p><strong>Edad:</strong> ${item.age}</p>
+          <p><strong>Hábitat:</strong> ${item.habitat}</p>
+          <p><strong>Género:</strong> ${item.gender}</p>
+          <p><strong>Dieta:</strong> ${item.diet}</p>
+          <p><strong>Descripción:</strong> ${item.description}</p>
+          <div class="card-buttons">
+            <button onclick="deleteAnimal(${item.id})">Eliminar</button>
+            <button onclick="openEditModal(${item.id}, '${item.name}', '${item.species}', ${item.age}, '${item.habitat}', '${item.gender}', '${item.diet}', '${item.description}')">Editar</button>
+          </div>
+        </div>
+      `;
+    });
 
-        htmlTableAnimals += '</table>';
-        $('#resultado').html(htmlTableAnimals);
+    htmlCards += '</div>';
+    $('#resultado').html(htmlCards);
       }
     );
 }
+
 function getAnimalById() {
     var id = $('#search-id').val();
 
@@ -91,9 +97,12 @@ function getAnimalById() {
                 <p>Especie: ${animal.species}</p>
                 <p>Edad: ${animal.age}</p>
                 <p>Hábitat: ${animal.habitat}</p>
+                <p>Género: ${animal.gender}</p>
+                <p>Dieta: ${animal.diet}</p>
                 <p>Descripción: ${animal.description}</p>
             `;
             $('#resultado').html(htmlAnimal);
+            $('#search-id').val('');
         } else {
             $('#resultado').html('<p>No se encontró un animal con ese ID.</p>');
         }
@@ -101,6 +110,7 @@ function getAnimalById() {
         alert('Error al obtener el animal. Asegúrate de que el ID sea válido.');
     });
 }
+
 function deleteAnimal(id) {
     if (confirm("¿Estás segura de que quieres eliminar al animal con id " + id + "?")) {
         $.ajax({
@@ -119,12 +129,14 @@ function deleteAnimal(id) {
     }
 }
 
-function openEditModal(id, name, species, age, habitat, description) {
+function openEditModal(id, name, species, age, habitat, gender, diet, description) {
   $('#edit-id').val(id);
   $('#edit-name').val(name);
   $('#edit-species').val(species);
   $('#edit-age').val(age);
   $('#edit-habitat').val(habitat);
+  $('#edit-gender').val(gender);
+  $('#edit-diet').val(diet);
   $('#edit-description').val(description);
   $('#editModal').removeClass('hidden');
 }
@@ -140,6 +152,8 @@ function confirmEdit() {
     species: $('#edit-species').val(),
     age: $('#edit-age').val(),
     habitat: $('#edit-habitat').val(),
+    gender: $('#edit-gender').val(),
+    diet: $('#edit-diet').val(),
     description: $('#edit-description').val()
   };
 
@@ -155,15 +169,5 @@ function confirmEdit() {
       showToast('🐾 Animal actualizado correctamente');
     }
   });
-}
-
-function showToast(message) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.className = 'toast show';
-
-  setTimeout(() => {
-    toast.className = 'toast';
-  }, 3000);
 }
 
